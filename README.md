@@ -2,6 +2,11 @@
 
 FocusFlow is a small React application that helps you plan focused study sessions, balance breaks with a simple Pomodoro-style timer, and review your progress over time.
 
+<img width="1161" height="676" alt="image" src="https://github.com/user-attachments/assets/a49b2c5c-61d5-4a41-8b61-15ff17b23116" />
+<img width="1161" height="676" alt="image" src="https://github.com/user-attachments/assets/07a57dac-be75-4b8b-aa31-3c2d31e40c4d" />
+<img width="1161" height="789" alt="image" src="https://github.com/user-attachments/assets/5e16d624-cd73-43bd-91e8-552b37221407" />
+
+
 ## Features
 
 - Create study sessions
