@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import SessionForm from '../features/sessions/SessionForm.jsx'
 import SessionList from '../features/sessions/SessionList.jsx'
 
@@ -33,8 +33,36 @@ const initialSessions = [
 ]
 
 function PlannerPage() {
-  const [sessions, setSessions] = useState(initialSessions)
+  const [sessions, setSessions] = useState([])
   const [editingSession, setEditingSession] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('focusflow:sessions')
+
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (Array.isArray(parsed)) {
+          setSessions(parsed)
+          setIsLoading(false)
+          return
+        }
+      }
+
+      setSessions(initialSessions)
+    } catch (error) {
+      setSessions(initialSessions)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isLoading) {
+      localStorage.setItem('focusflow:sessions', JSON.stringify(sessions))
+    }
+  }, [sessions, isLoading])
 
   function handleAddSession(newSession) {
     setSessions((currentSessions) => [newSession, ...currentSessions])
@@ -64,6 +92,8 @@ function PlannerPage() {
         Plan focused study blocks, set short breaks, and keep everything in one simple list before
         you start your timer.
       </p>
+
+      {isLoading && <p>Loading your sessions...</p>}
 
       <SessionForm
         key={editingSession ? editingSession.id : 'new'}
