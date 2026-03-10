@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
-function SessionForm({ onSubmit }) {
-  const [title, setTitle] = useState('')
-  const [topic, setTopic] = useState('')
-  const [duration, setDuration] = useState(50)
-  const [breakDuration, setBreakDuration] = useState(10)
+function SessionForm({ onSubmit, initialValues, isEditing, onCancel }) {
+  const [title, setTitle] = useState(initialValues?.title || '')
+  const [topic, setTopic] = useState(initialValues?.topic || '')
+  const [duration, setDuration] = useState(initialValues?.duration || 50)
+  const [breakDuration, setBreakDuration] = useState(initialValues?.breakDuration || 10)
   const [error, setError] = useState('')
 
   function handleSubmit(event) {
@@ -17,29 +17,33 @@ function SessionForm({ onSubmit }) {
 
     setError('')
 
-    const newSession = {
-      id: crypto.randomUUID(),
+    const sessionToSave = {
+      id: initialValues?.id || crypto.randomUUID(),
       title: title.trim(),
       topic: topic.trim() || 'General',
       duration: Number(duration),
       breakDuration: Number(breakDuration),
-      status: 'planned',
-      createdAt: new Date().toISOString(),
+      status: initialValues?.status || 'planned',
+      createdAt: initialValues?.createdAt || new Date().toISOString(),
     }
 
     if (onSubmit) {
-      onSubmit(newSession)
+      onSubmit(sessionToSave)
     }
 
-    setTitle('')
-    setTopic('')
-    setDuration(50)
-    setBreakDuration(10)
+    if (!isEditing) {
+      setTitle('')
+      setTopic('')
+      setDuration(50)
+      setBreakDuration(10)
+    }
   }
 
   return (
     <form className="session-form" onSubmit={handleSubmit}>
-      <h2 className="session-form__title">Plan a new session</h2>
+      <h2 className="session-form__title">
+        {isEditing ? 'Edit session' : 'Plan a new session'}
+      </h2>
 
       <div className="session-form__row">
         <label>
@@ -91,9 +95,20 @@ function SessionForm({ onSubmit }) {
 
       {error && <p className="session-form__error">{error}</p>}
 
-      <button type="submit" className="session-form__submit">
-        Add session
-      </button>
+      <div className="session-form__actions">
+        <button type="submit" className="session-form__submit">
+          {isEditing ? 'Update session' : 'Add session'}
+        </button>
+        {isEditing && (
+          <button
+            type="button"
+            className="session-form__cancel"
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+        )}
+      </div>
     </form>
   )
 }

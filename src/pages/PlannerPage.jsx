@@ -34,9 +34,27 @@ const initialSessions = [
 
 function PlannerPage() {
   const [sessions, setSessions] = useState(initialSessions)
+  const [editingSession, setEditingSession] = useState(null)
 
   function handleAddSession(newSession) {
     setSessions((currentSessions) => [newSession, ...currentSessions])
+  }
+
+  function handleEditClick(session) {
+    setEditingSession(session)
+  }
+
+  function handleUpdateSession(updatedSession) {
+    setSessions((currentSessions) =>
+      currentSessions.map((session) =>
+        session.id === updatedSession.id ? { ...session, ...updatedSession } : session,
+      ),
+    )
+    setEditingSession(null)
+  }
+
+  function handleCancelEdit() {
+    setEditingSession(null)
   }
 
   return (
@@ -47,10 +65,16 @@ function PlannerPage() {
         you start your timer.
       </p>
 
-      <SessionForm onSubmit={handleAddSession} />
+      <SessionForm
+        key={editingSession ? editingSession.id : 'new'}
+        onSubmit={editingSession ? handleUpdateSession : handleAddSession}
+        initialValues={editingSession}
+        isEditing={Boolean(editingSession)}
+        onCancel={handleCancelEdit}
+      />
 
       <h2>Upcoming sessions</h2>
-      <SessionList sessions={sessions} />
+      <SessionList sessions={sessions} onEdit={handleEditClick} />
     </section>
   )
 }
