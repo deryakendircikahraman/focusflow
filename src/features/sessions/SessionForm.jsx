@@ -46,54 +46,66 @@ function SessionForm({ onSubmit, initialValues, isEditing, onCancel }) {
       </h2>
 
       <div className="session-form__row">
-        <label>
+        <label htmlFor="session-form-title">
           Session title
-          <input
-            type="text"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-            placeholder="Focus block for React study"
-          />
         </label>
+        <input
+          id="session-form-title"
+          type="text"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          placeholder="Focus block for React study"
+          aria-describedby={error ? 'session-form-error' : undefined}
+        />
       </div>
 
       <div className="session-form__row">
-        <label>
+        <label htmlFor="session-form-topic">
           Study topic
-          <input
-            type="text"
-            value={topic}
-            onChange={(event) => setTopic(event.target.value)}
-            placeholder="React, Algorithms, Linear Algebra..."
-          />
         </label>
+        <input
+          id="session-form-topic"
+          type="text"
+          value={topic}
+          onChange={(event) => setTopic(event.target.value)}
+          placeholder="React, Algorithms, Linear Algebra..."
+        />
       </div>
 
       <div className="session-form__grid">
-        <label>
-          Focus duration (minutes)
+        <div className="session-form__field">
+          <label htmlFor="session-form-duration">
+            Focus duration (minutes)
+          </label>
           <input
+            id="session-form-duration"
             type="number"
             min="10"
             max="180"
             value={duration}
             onChange={(event) => setDuration(event.target.value)}
           />
-        </label>
-
-        <label>
-          Break duration (minutes)
+        </div>
+        <div className="session-form__field">
+          <label htmlFor="session-form-break">
+            Break duration (minutes)
+          </label>
           <input
+            id="session-form-break"
             type="number"
             min="0"
             max="60"
             value={breakDuration}
             onChange={(event) => setBreakDuration(event.target.value)}
           />
-        </label>
+        </div>
       </div>
 
-      {error && <p className="session-form__error">{error}</p>}
+      {error && (
+        <p id="session-form-error" className="session-form__error" role="alert">
+          {error}
+        </p>
+      )}
 
       <div className="session-form__actions">
         <button type="submit" className="session-form__submit">

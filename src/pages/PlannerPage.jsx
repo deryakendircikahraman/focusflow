@@ -167,7 +167,7 @@ function PlannerPage() {
         onCancel={handleCancelEdit}
       />
 
-      <h2>Upcoming sessions</h2>
+      <h2>Sessions</h2>
       <SessionList
         sessions={sortedSessions}
         onEdit={handleEditClick}

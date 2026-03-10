@@ -40,8 +40,7 @@ function ProductivityTip() {
       }
 
       setTip(adviceText)
-    } catch (error) {
-      // Fall back to a local tip so the UI still shows something useful
+    } catch {
       const randomIndex = Math.floor(Math.random() * FALLBACK_TIPS.length)
       setTip(FALLBACK_TIPS[randomIndex])
       setHasError(true)
