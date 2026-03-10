@@ -146,3 +146,38 @@
   color: #e5e7eb;
   border-color: rgba(148, 163, 184, 0.5);
 }
+
+.stats-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 720px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.stats-card {
+  padding: 1rem 1.1rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.stats-card h3 {
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+}
+
+.stats-card__value {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.stats-card__label {
+  font-size: 0.85rem;
+  color: #cbd5f5;
+  margin-top: 0.25rem;
+}
