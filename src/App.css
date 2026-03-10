@@ -72,3 +72,77 @@
   line-height: 1.6;
   font-size: 0.98rem;
 }
+
+.planner-list {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.planner-card {
+  padding: 1rem 1.1rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.planner-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.planner-card__header h2 {
+  font-size: 1.05rem;
+}
+
+.planner-card__topic {
+  font-size: 0.9rem;
+  color: #e5e7eb;
+  margin-bottom: 0.6rem;
+}
+
+.planner-card__meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.planner-card__meta dt {
+  font-weight: 600;
+  color: #bfdbfe;
+}
+
+.planner-card__meta dd {
+  margin: 0.05rem 0 0;
+  color: #cbd5f5;
+}
+
+.badge {
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid transparent;
+}
+
+.badge--planned {
+  background: rgba(56, 189, 248, 0.1);
+  color: #7dd3fc;
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.badge--active {
+  background: rgba(74, 222, 128, 0.1);
+  color: #86efac;
+  border-color: rgba(74, 222, 128, 0.5);
+}
+
+.badge--completed {
+  background: rgba(148, 163, 184, 0.1);
+  color: #e5e7eb;
+  border-color: rgba(148, 163, 184, 0.5);
+}
