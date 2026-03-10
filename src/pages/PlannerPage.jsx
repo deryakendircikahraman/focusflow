@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import SessionForm from '../features/sessions/SessionForm.jsx'
 import SessionList from '../features/sessions/SessionList.jsx'
+import FocusTimer from '../features/sessions/FocusTimer.jsx'
 
 const initialSessions = [
   {
@@ -105,6 +106,8 @@ function PlannerPage() {
 
       <h2>Upcoming sessions</h2>
       <SessionList sessions={sessions} onEdit={handleEditClick} />
+
+      <FocusTimer />
     </section>
   )
 }

@@ -181,3 +181,32 @@
   color: #cbd5f5;
   margin-top: 0.25rem;
 }
+
+.timer {
+  margin-top: 2rem;
+  padding: 1.25rem 1.3rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  background: radial-gradient(circle at top, rgba(56, 189, 248, 0.25), #020617 65%);
+}
+
+.timer__mode {
+  font-size: 0.9rem;
+  color: #bae6fd;
+}
+
+.timer__time {
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin: 0.5rem 0 0.75rem;
+}
+
+.timer__actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.timer__actions button {
+  flex: 0 0 auto;
+}
