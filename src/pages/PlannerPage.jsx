@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import SessionForm from '../features/sessions/SessionForm.jsx'
 import SessionList from '../features/sessions/SessionList.jsx'
 import FocusTimer from '../features/sessions/FocusTimer.jsx'
@@ -37,6 +37,7 @@ function PlannerPage() {
   const [sessions, setSessions] = useState([])
   const [editingSession, setEditingSession] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [timerSession, setTimerSession] = useState(null)
 
   useEffect(() => {
     try {
@@ -65,26 +66,81 @@ function PlannerPage() {
     }
   }, [sessions, isLoading])
 
-  function handleAddSession(newSession) {
+  const handleAddSession = useCallback((newSession) => {
     setSessions((currentSessions) => [newSession, ...currentSessions])
-  }
+  }, [])
 
-  function handleEditClick(session) {
+  const handleEditClick = useCallback((session) => {
     setEditingSession(session)
-  }
+  }, [])
 
-  function handleUpdateSession(updatedSession) {
+  const handleUpdateSession = useCallback((updatedSession) => {
     setSessions((currentSessions) =>
       currentSessions.map((session) =>
         session.id === updatedSession.id ? { ...session, ...updatedSession } : session,
       ),
     )
     setEditingSession(null)
-  }
+  }, [])
 
-  function handleCancelEdit() {
+  const handleCancelEdit = useCallback(() => {
     setEditingSession(null)
-  }
+  }, [])
+
+  const handleDeleteSession = useCallback((idToDelete) => {
+    setSessions((currentSessions) =>
+      currentSessions.filter((session) => session.id !== idToDelete),
+    )
+
+    setEditingSession((current) =>
+      current && current.id === idToDelete ? null : current,
+    )
+  }, [])
+
+  const handleStartTimerForSession = useCallback((session) => {
+    if (!session || session.status === 'completed') {
+      return
+    }
+
+    setTimerSession(session)
+    setSessions((currentSessions) =>
+      currentSessions.map((item) => {
+        if (item.id === session.id && item.status !== 'completed') {
+          return { ...item, status: 'active' }
+        }
+        if (item.status === 'active' && item.id !== session.id) {
+          return { ...item, status: 'planned' }
+        }
+        return item
+      }),
+    )
+  }, [])
+
+  const handleFocusComplete = useCallback((sessionId) => {
+    setSessions((currentSessions) =>
+      currentSessions.map((session) =>
+        session.id === sessionId ? { ...session, status: 'completed' } : session,
+      ),
+    )
+  }, [])
+
+  useEffect(() => {
+    if (editingSession) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [editingSession])
+
+  useEffect(() => {
+    if (timerSession) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [timerSession])
+
+  const sortedSessions = [...sessions].sort((a, b) => {
+    if (a.status === 'completed' && b.status !== 'completed') return 1
+    if (b.status === 'completed' && a.status !== 'completed') return -1
+    return 0
+  })
 
   return (
     <section>
@@ -94,7 +150,14 @@ function PlannerPage() {
         you start your timer.
       </p>
 
-      {isLoading && <p className="sessions-loading">Loading your sessions...</p>}
+      <p>
+        1) Create or edit a session below. 2) Use the &quot;Start Focus&quot; button on a session card to
+        load it into the timer. 3) Start the timer to focus on that single task.
+      </p>
+
+      {isLoading && <p className="sessions-loading">Loading sessions...</p>}
+
+      <FocusTimer session={timerSession} onFocusComplete={handleFocusComplete} />
 
       <SessionForm
         key={editingSession ? editingSession.id : 'new'}
@@ -105,9 +168,12 @@ function PlannerPage() {
       />
 
       <h2>Upcoming sessions</h2>
-      <SessionList sessions={sessions} onEdit={handleEditClick} />
-
-      <FocusTimer />
+      <SessionList
+        sessions={sortedSessions}
+        onEdit={handleEditClick}
+        onDelete={handleDeleteSession}
+        onStartTimer={handleStartTimerForSession}
+      />
     </section>
   )
 }

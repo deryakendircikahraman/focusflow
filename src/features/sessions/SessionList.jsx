@@ -1,11 +1,11 @@
 import SessionCard from './SessionCard.jsx'
 
-function SessionList({ sessions, onEdit }) {
+function SessionList({ sessions, onEdit, onDelete, onStartTimer }) {
   if (!sessions || sessions.length === 0) {
     return (
       <div className="session-list-empty">
-        <h2>No sessions yet</h2>
-        <p>Add your first FocusFlow session using the form above to get started.</p>
+        <h2>No study sessions yet</h2>
+        <p>Create your first session to start planning your study time.</p>
       </div>
     )
   }
@@ -13,7 +13,13 @@ function SessionList({ sessions, onEdit }) {
   return (
     <div className="planner-list">
       {sessions.map((session) => (
-        <SessionCard key={session.id} session={session} onEdit={onEdit} />
+        <SessionCard
+          key={session.id}
+          session={session}
+          onEdit={onEdit}
+          onDelete={onDelete}
+          onStartTimer={onStartTimer}
+        />
       ))}
     </div>
   )

@@ -42,7 +42,7 @@ function SessionForm({ onSubmit, initialValues, isEditing, onCancel }) {
   return (
     <form className="session-form" onSubmit={handleSubmit}>
       <h2 className="session-form__title">
-        {isEditing ? 'Edit session' : 'Plan a new session'}
+        {isEditing ? 'Edit Session' : 'Create Session'}
       </h2>
 
       <div className="session-form__row">
@@ -97,7 +97,7 @@ function SessionForm({ onSubmit, initialValues, isEditing, onCancel }) {
 
       <div className="session-form__actions">
         <button type="submit" className="session-form__submit">
-          {isEditing ? 'Update session' : 'Add session'}
+          {isEditing ? 'Update Session' : 'Create Session'}
         </button>
         {isEditing && (
           <button

@@ -1,4 +1,4 @@
-function SessionCard({ session, onEdit }) {
+function SessionCard({ session, onEdit, onDelete, onStartTimer }) {
   if (!session) return null
 
   const readableStatus = session.status
@@ -27,13 +27,31 @@ function SessionCard({ session, onEdit }) {
 
       <p className="planner-card__status">Status: {readableStatus}</p>
 
-      <button
-        type="button"
-        className="session-card__edit"
-        onClick={() => onEdit && onEdit(session)}
-      >
-        Edit
-      </button>
+      <div className="session-card__actions">
+        {session.status !== 'completed' && (
+          <button
+            type="button"
+            onClick={() => onStartTimer && onStartTimer(session)}
+          >
+            Start Focus
+          </button>
+        )}
+        <button
+          type="button"
+          className="session-card__edit"
+          onClick={() => onEdit && onEdit(session)}
+          disabled={session.status === 'completed'}
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          className="session-card__delete"
+          onClick={() => onDelete && onDelete(session.id)}
+        >
+          Delete
+        </button>
+      </div>
     </article>
   )
 }

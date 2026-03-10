@@ -1,9 +1,13 @@
 import { NavLink } from 'react-router-dom'
+import logo from '../assets/focusflow-logo.png'
 
 function Navbar() {
   return (
     <nav className="navbar">
-      <h1 className="navbar__brand">FocusFlow</h1>
+      <div className="navbar__brand">
+        <img src={logo} alt="FocusFlow logo" className="navbar__logo" />
+        <span className="navbar__title">FocusFlow</span>
+      </div>
       <div className="navbar__links">
         <NavLink
           to="/"

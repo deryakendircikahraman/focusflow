@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import StatsSummary from '../features/stats/StatsSummary.jsx'
+import TopicDurationChart from '../features/stats/TopicDurationChart.jsx'
 
 function HistoryPage() {
   const [sessions, setSessions] = useState([])
@@ -22,12 +23,23 @@ function HistoryPage() {
     }
   }, [])
 
+  if (isLoading) {
+    return (
+      <section>
+        <h1>Study History</h1>
+        <p>Review your past study sessions and see how your focus has improved over time.</p>
+        <p>Loading stats...</p>
+      </section>
+    )
+  }
+
   return (
     <section>
       <h1>Study History</h1>
       <p>Review your past study sessions and see how your focus has improved over time.</p>
 
-      {isLoading ? <p>Loading stats...</p> : <StatsSummary sessions={sessions} />}
+      <StatsSummary sessions={sessions} />
+      <TopicDurationChart sessions={sessions} />
     </section>
   )
 }
