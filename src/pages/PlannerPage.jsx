@@ -1,4 +1,8 @@
-const sampleSessions = [
+import { useState } from 'react'
+import SessionForm from '../features/sessions/SessionForm.jsx'
+import SessionList from '../features/sessions/SessionList.jsx'
+
+const initialSessions = [
   {
     id: 'sess-1',
     title: 'Deep Work – Algorithms',
@@ -29,35 +33,24 @@ const sampleSessions = [
 ]
 
 function PlannerPage() {
+  const [sessions, setSessions] = useState(initialSessions)
+
+  function handleAddSession(newSession) {
+    setSessions((currentSessions) => [newSession, ...currentSessions])
+  }
+
   return (
     <section>
       <h1>Study Planner</h1>
       <p>
-        This is a preview of how your FocusFlow study sessions will look once you start planning and
-        tracking them.
+        Plan focused study blocks, set short breaks, and keep everything in one simple list before
+        you start your timer.
       </p>
 
-      <div className="planner-list">
-        {sampleSessions.map((session) => (
-          <article key={session.id} className="planner-card">
-            <header className="planner-card__header">
-              <h2>{session.title}</h2>
-              <span className={`badge badge--${session.status}`}>{session.status}</span>
-            </header>
-            <p className="planner-card__topic">{session.topic}</p>
-            <dl className="planner-card__meta">
-              <div>
-                <dt>Focus</dt>
-                <dd>{session.duration} minutes</dd>
-              </div>
-              <div>
-                <dt>Break</dt>
-                <dd>{session.breakDuration} minutes</dd>
-              </div>
-            </dl>
-          </article>
-        ))}
-      </div>
+      <SessionForm onSubmit={handleAddSession} />
+
+      <h2>Upcoming sessions</h2>
+      <SessionList sessions={sessions} />
     </section>
   )
 }
