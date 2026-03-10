@@ -52,6 +52,7 @@
   background: #2563eb;
   border-color: #60a5fa;
   box-shadow: 0 8px 18px rgba(37, 99, 235, 0.4);
+  font-weight: 600;
 }
 
 .layout__main {
@@ -71,6 +72,17 @@
   color: #cbd5f5;
   line-height: 1.6;
   font-size: 0.98rem;
+}
+
+.session-form {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sessions-loading {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #cbd5f5;
 }
 
 .planner-list {
@@ -117,6 +129,30 @@
 
 .planner-card__meta dd {
   margin: 0.05rem 0 0;
+  color: #cbd5f5;
+}
+
+.planner-card__status {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: #e5e7eb;
+}
+
+.session-list-empty {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.3rem;
+  border-radius: 0.9rem;
+  border: 1px dashed rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.session-list-empty h2 {
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.session-list-empty p {
+  font-size: 0.9rem;
   color: #cbd5f5;
 }
 

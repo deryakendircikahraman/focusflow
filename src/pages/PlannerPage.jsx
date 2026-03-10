@@ -94,7 +94,7 @@ function PlannerPage() {
         you start your timer.
       </p>
 
-      {isLoading && <p>Loading your sessions...</p>}
+      {isLoading && <p className="sessions-loading">Loading your sessions...</p>}
 
       <SessionForm
         key={editingSession ? editingSession.id : 'new'}

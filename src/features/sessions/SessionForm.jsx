@@ -47,7 +47,7 @@ function SessionForm({ onSubmit, initialValues, isEditing, onCancel }) {
 
       <div className="session-form__row">
         <label>
-          Title
+          Session title
           <input
             type="text"
             value={title}
@@ -59,7 +59,7 @@ function SessionForm({ onSubmit, initialValues, isEditing, onCancel }) {
 
       <div className="session-form__row">
         <label>
-          Topic
+          Study topic
           <input
             type="text"
             value={topic}
@@ -71,7 +71,7 @@ function SessionForm({ onSubmit, initialValues, isEditing, onCancel }) {
 
       <div className="session-form__grid">
         <label>
-          Duration (minutes)
+          Focus duration (minutes)
           <input
             type="number"
             min="10"
@@ -82,7 +82,7 @@ function SessionForm({ onSubmit, initialValues, isEditing, onCancel }) {
         </label>
 
         <label>
-          Break (minutes)
+          Break duration (minutes)
           <input
             type="number"
             min="0"

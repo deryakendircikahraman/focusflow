@@ -1,6 +1,10 @@
 function SessionCard({ session, onEdit }) {
   if (!session) return null
 
+  const readableStatus = session.status
+    ? session.status.charAt(0).toUpperCase() + session.status.slice(1)
+    : 'Planned'
+
   return (
     <article className="planner-card">
       <header className="planner-card__header">
@@ -20,6 +24,8 @@ function SessionCard({ session, onEdit }) {
           <dd>{session.breakDuration} minutes</dd>
         </div>
       </dl>
+
+      <p className="planner-card__status">Status: {readableStatus}</p>
 
       <button
         type="button"

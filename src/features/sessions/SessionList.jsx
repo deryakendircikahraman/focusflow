@@ -2,7 +2,12 @@ import SessionCard from './SessionCard.jsx'
 
 function SessionList({ sessions, onEdit }) {
   if (!sessions || sessions.length === 0) {
-    return <p>No sessions planned yet.</p>
+    return (
+      <div className="session-list-empty">
+        <h2>No sessions yet</h2>
+        <p>Add your first FocusFlow session using the form above to get started.</p>
+      </div>
+    )
   }
 
   return (
