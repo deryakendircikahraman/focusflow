@@ -2,6 +2,17 @@
 
 FocusFlow is a small React application that helps you plan focused study sessions, balance breaks with a simple Pomodoro-style timer, and review your progress over time.
 
+## Features
+
+- Create study sessions
+- Edit and delete existing sessions
+- Start a Pomodoro-style focus timer for a session
+- Automatic break timer after focus time
+- Study statistics dashboard
+- Topic-based study distribution chart
+- Productivity tip fetched from a public API
+- Session data persistence using localStorage
+
 ## Tech stack
 
 - Vite (React template, JavaScript)
@@ -40,13 +51,6 @@ npm run build
 
 This project currently uses only client-side state and `localStorage`. If you add APIs later, use `.env.local` for secrets and keep the example values in `.env.local.example`.
 
-## Features
-
-- Plan study sessions with a title, topic, focus duration, and break duration
-- Create and edit sessions (state lives in `PlannerPage` and is passed to feature components)
-- Persist sessions using `localStorage`
-- View basic study stats and a simple topic-based chart on the History page
-- Use a basic Pomodoro-style focus timer on the Planner page
 
 ## Routing
 
